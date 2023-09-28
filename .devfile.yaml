@@ -1,6 +1,9 @@
 schemaVersion: 2.2.0
 metadata:
   name: quarkus-todo
+  attributes:
+    controller.devfile.io/devworkspace-config:
+      name: custom-dwoc
 components:
   - name: tooling-container
     container:
