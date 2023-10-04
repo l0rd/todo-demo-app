@@ -1,9 +1,6 @@
 schemaVersion: 2.2.0
 metadata:
   name: quarkus-todo
-  attributes:
-    controller.devfile.io/devworkspace-config:
-      name: custom-dwoc
 components:
   - name: tooling-container
     container:
@@ -16,7 +13,7 @@ components:
           value: 'true'
         - name: QUARKUS_DATASOURCE_DEVSERVICES_VOLUMES_  # <-- https://quarkus.io/guides/databases-dev-services#quarkus-datasource-config-group-dev-services-build-time-config_quarkus.datasource.devservices.volumes-volumes
           value: '/var/lib/postgresql/'
-      image: quay.io/devfile/universal-developer-image:latest
+      image: quay.io/aobuchow/universal-developer-image:stow
       memoryRequest: 2Gi
       memoryLimit: 8Gi
       cpuRequest: 1000m
@@ -25,7 +22,12 @@ components:
         - exposure: none
           name: kubedock
           protocol: tcp
-          targetPort: 2475      
+          targetPort: 2475
+      volumeMounts:
+        - name: home-volume
+          path: /home/user
+  - name: home-volume
+    volume: {}
 commands:
   - id: run
     exec:
